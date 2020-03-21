@@ -4,19 +4,20 @@
       {{confirmedPersonn}}
     </div>
     <div class="three columns as">
+      {{this.$store.getters.countryConfirmed}}
     </div>
     <div class="three columns sa"></div>
+
     <div class="three columns as"></div>
   </section>
 </template>
-
 <script>
   export default {
     name: "Home",
     created() {
       this.$store.dispatch('confirmedPerson').then(()=>{
-
-      })
+      });
+      this.$store.dispatch('confirmedDetail')
     },
     computed:{
       confirmedPersonn(){

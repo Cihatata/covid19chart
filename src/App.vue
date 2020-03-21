@@ -8,6 +8,7 @@
 <script>
   import Header from './components/Header'
   import Home from './components/Home'
+  import Turkiye from "./components/Turkiye";
 export default {
   name: 'app',
   data () {
@@ -18,6 +19,7 @@ export default {
   components:{
     Header,
     Home,
+    Turkiye,
   }
 }
 </script>

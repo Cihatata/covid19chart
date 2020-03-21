@@ -1,4 +1,5 @@
 import Home from '../components/Home'
+import Turkiye from '../components/Turkiye'
 
 export default ({
   routes: [
@@ -7,6 +8,11 @@ export default ({
       name: 'Home',
       component: Home,
     },
+    {
+      path: '/turkey',
+      name: 'Turkey',
+      component: Turkiye
+    }
 
   ],
   mode: 'history',
