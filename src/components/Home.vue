@@ -6,7 +6,7 @@
         <h4>{{confirmedPersonn}}</h4>
       </div>
       <section class="Home-info-confirmedDetail">
-        <top10 v-if="countryData!==undefined" v-for="countryData in countryConfirmed " :country-data="countryData" ></top10>
+        <top10 v-if="countryConfirmed!==undefined"  :country-data="countryConfirmed" ></top10>
       </section>
     </div>
     <div class="three columns Home-info">
@@ -93,10 +93,9 @@
       &-confirmedDetail{
         background-color: $acikkirmizi;
         padding: 3px 5px;
-
+        height: 60%;
         border-radius: 7px;
         box-shadow: 7px 10px 10px -1px rgba($koyu,0.6)
-
       }
     }
 

@@ -1,17 +1,30 @@
 <template>
-
-  <div class="element">
-    <div class="element-countryName">
-      {{ countryData.sira }}-{{countryData.countryRegion}}
+  <section>
+    <div v-for="(item,index) in countryData">
+      <div v-if="item.countryRegion!=='Turkey'" class="element" >
+        <div  class="element-countryName">
+          {{ index+1 }}-{{item.countryRegion}}
+        </div>
+        <div v-if="item.provinceState!=null" class="element-provincestate">
+          ({{item.provinceState}})
+        </div>
+        <div class="element-confirmed">
+          {{item.confirmed}}
+        </div>
+      </div>
+      <div v-else class="element turkey">
+        <div  class="element-countryName">
+          {{ item.sira }}-{{item.countryRegion}}
+        </div>
+        <div v-if="item.provinceState!=null" class="element-provincestate">
+          ({{item.provinceState}})
+        </div>
+        <div class="element-confirmed">
+          {{item.confirmed}}
+        </div>
+      </div>
     </div>
-    <div v-if="countryData.provinceState!=null" class="element-provincestate">
-      ({{countryData.provinceState}})
-    </div>
-    <div class="element-confirmed">
-      {{countryData.confirmed}}
-
-    </div>
-  </div>
+  </section>
 
 </template>
 
@@ -25,7 +38,7 @@
 
     },
     props: {
-      countryData: {type: Object, required: true}
+      countryData: {type: Array, required: true}
     },
     method: {
       count() {
@@ -40,6 +53,7 @@
   @import "../assets/css/base/mixin";
   @import "../assets/css/base/color";
 
+  
   .element {
     display: flex;
     position: relative;
@@ -67,6 +81,10 @@
       color: #eee;
       font-weight: 500;
       font-size: 24px;
+
+      &-turkey {
+
+      }
     }
 
     &-provincestate {
