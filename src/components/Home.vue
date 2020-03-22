@@ -71,11 +71,12 @@
         h4{
           color:darkred;
           font-size: 18vw;
+          letter-spacing: 3px;
           font-weight: 600;
           //text-shadow: -2px 0 gray, 0 2px gray, 2px 0 $koyu, 0 -2px $koyu;
           @include mq("tablet"){
             font-size: 3vw;
-            text-shadow: -1px 0 $koyu, 0 1px $koyu, 1px 0 $koyu, 0 -1px $koyu;
+            //text-shadow: -1px 0 $koyu, 0 1px $koyu, 1px 0 $koyu, 0 -1px $koyu;
           }
         }
         h3{

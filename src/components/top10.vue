@@ -53,7 +53,7 @@
   @import "../assets/css/base/mixin";
   @import "../assets/css/base/color";
 
-  
+
   .element {
     display: flex;
     position: relative;
