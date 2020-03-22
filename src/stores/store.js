@@ -6,26 +6,21 @@ const state = {
   countryInfo:{}
 };
 const getters = {
-   countryConfirmed(state){
-     let len = state.confirmedDetail.length;
-     console.log(len);
-     let chineSumConfirmed=0;
-     let usSumConfirmed = 0;
-     for( var i=0;i<len;i++){
-       if(state.confirmedDetail[i].countryRegion === "China"){
-         chineSumConfirmed+= state.confirmedDetail[i].confirmed;
-         state.confirmedDetail.splice(i,1);
-         len--;
-       } else if (state.confirmedDetail[i].countryRegion === "US"){
-          usSumConfirmed+= state.confirmedDetail[i].confirmed;
-          state.confirmedDetail.splice(i,1);
-          len--;
-       }
 
+   countryConfirmed(state) {
+     let obj=[]
+     let len = state.confirmedDetail.length
+     for (let i=0;i<10;i++){
+        obj.push(state.confirmedDetail[i])
      }
-    console.log(state.confirmedDetail.length)
-     console.log('xx')
-     return [chineSumConfirmed,usSumConfirmed];
+     for (let i=0;i<len;i++){
+       if (state.confirmedDetail[i].countryRegion == 'Turkey'){
+         state.confirmedDetail[i].sira=i+1
+         obj.push(state.confirmedDetail[i])
+       }
+     }
+     console.log(obj)
+     return obj;
    }
 };
 const mutations = {
@@ -47,7 +42,7 @@ const actions = {
     })
   } ,
   confirmedDetail(context) {
-    return service.confirmedDeatil().then((snapshot)=>{
+    return  service.confirmedDeatil().then((snapshot)=>{
       context.commit('setConfirmedDetail',(snapshot))
     })
 

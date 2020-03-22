@@ -12,7 +12,7 @@ export default {
         return res.data.confirmed.value;
       })
   },
-  confirmedDeatil(){
+    confirmedDeatil(){
     return http.get('/confirmed')
       .then((res)=> {
         return res.data;

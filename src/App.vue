@@ -26,6 +26,8 @@ export default {
 
 <style lang="scss">
   @import "./assets/css/skeleton";
+  @import "./assets/css/base/color";
+
 #app {
 
 }
