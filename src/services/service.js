@@ -12,7 +12,7 @@ export default {
         return res.data.confirmed.value;
       })
   },
-    confirmedDeatil(){
+  confirmedDeatil(){
     return http.get('/confirmed')
       .then((res)=> {
         return res.data;
@@ -46,6 +46,20 @@ export default {
     return http.get(`/confirmed/${countryName}`)
       .then((res)=> {
         return res.data.value
+      })
+  },
+  daily(){
+    return http.get('/daily')
+      .then((res)=>{
+          console.log(res.data[0]);
+          for (let i=0;i<20;i++){
+            let month =parseInt(res.data[i].reportDate.slice(5,7))
+            console.log(month)
+            //Aylari objeye bas daha sonra aylardaki hastalari toplayacagiz.
+            return '20';
+          }
+      }).then((res)=>{
+
       })
   }
 }

@@ -15,7 +15,9 @@
       <confirmedChart :labels="arr1" :confirmed="arr2" ></confirmedChart>
       <confirmedChart :labels="arr1" :confirmed="arr2"  ></confirmedChart>
     </div>
-    <div class="three columns as Home-info"></div>
+    <div class="three columns as Home-info">
+      {{this.$store.state.daily}}
+    </div>
 
   </section>
 </template>
@@ -32,11 +34,15 @@
         arr2:[10,20,30,40,50,60,70,80,90,101,103,140]
       }
     },
+    mounted() {
+      this.$store.dispatch('daily').then(()=>{
+
+      })
+    },
     created() {
       this.$store.dispatch('confirmedPerson').then(() => {
       });
       this.$store.dispatch('confirmedDetail').then(() => {
-
       })
     },
 

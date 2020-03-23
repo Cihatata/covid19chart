@@ -3,7 +3,8 @@ import service from '../services/service'
 const state = {
   confirmedPerson:null,
   confirmedDetail:{},
-  countryInfo:{}
+  countryInfo:{},
+  daily:{}
 };
 const getters = {
 
@@ -32,6 +33,9 @@ const mutations = {
   },
   setCountryDetail(state,data) {
     state.countryInfo=data;
+  },
+  setDaily(state,data){
+    state.daily=data;
   }
 
 };
@@ -74,6 +78,11 @@ const actions = {
       context.commit('setCountryDetail',(snapshot))
     })
   },
+  daily(context){
+    return service.daily().then((snapshot)=>{
+        context.commit('setDaily',(snapshot))
+    })
+  }
 };
 export default {
   state,
