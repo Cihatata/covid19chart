@@ -13,7 +13,7 @@
     </div>
     <div class="six columns Home-info">
       <confirmedChart v-if="$store.state.ifDaily" :labels="arr1" :confirmed="this.$store.state.daily" ></confirmedChart>
-      <confirmedChart :labels="arr1" :confirmed="arr2"  ></confirmedChart>
+      <logirithmic v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></logirithmic>
     </div>
     <div v-if="$store.state.ifDaily" class="three columns as Home-info">
       {{this.$store.state.daily[2]}}
@@ -25,6 +25,7 @@
   import confirmedChart from "./confirmedChart";
   import {mapGetters} from 'vuex';
   import top10 from './top10'
+  import logirithmic from "./logirithmic";
 
   export default {
     name: "Home",
@@ -56,7 +57,8 @@
     },
     components: {
       top10,
-      confirmedChart
+      confirmedChart,
+      logirithmic,
     }
   }
   // new chart(document.getElementById('my-chart'), {
