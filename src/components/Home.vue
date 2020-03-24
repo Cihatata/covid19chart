@@ -12,11 +12,11 @@
       </section>
     </div>
     <div class="six columns Home-info">
-      <confirmedChart :labels="arr1" :confirmed="arr2" ></confirmedChart>
+      <confirmedChart v-if="$store.state.ifDaily" :labels="arr1" :confirmed="this.$store.state.daily" ></confirmedChart>
       <confirmedChart :labels="arr1" :confirmed="arr2"  ></confirmedChart>
     </div>
-    <div class="three columns as Home-info">
-      {{this.$store.state.daily}}
+    <div v-if="$store.state.ifDaily" class="three columns as Home-info">
+      {{this.$store.state.daily[2]}}
     </div>
 
   </section>
@@ -30,7 +30,7 @@
     name: "Home",
     data(){
       return{
-        arr1:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+        arr1:this.$store.state.daily[0],
         arr2:[10,20,30,40,50,60,70,80,90,101,103,140]
       }
     },
@@ -43,7 +43,7 @@
       this.$store.dispatch('confirmedPerson').then(() => {
       });
       this.$store.dispatch('confirmedDetail').then(() => {
-      })
+      });
     },
 
     computed: {

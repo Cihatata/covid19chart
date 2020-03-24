@@ -4,7 +4,11 @@ const state = {
   confirmedPerson:null,
   confirmedDetail:{},
   countryInfo:{},
-  daily:{}
+  daily:{},
+  ifDaily:false,
+  ifMounth:false,
+  mounth:{},
+
 };
 const getters = {
 
@@ -34,8 +38,13 @@ const mutations = {
   setCountryDetail(state,data) {
     state.countryInfo=data;
   },
+  setMounth(state,data){
+    state.mounth=data;
+    state.ifMounth=true;
+  },
   setDaily(state,data){
     state.daily=data;
+    state.ifDaily=true
   }
 
 };
@@ -78,11 +87,17 @@ const actions = {
       context.commit('setCountryDetail',(snapshot))
     })
   },
+  mounth(context){
+    return service.mounth().then((snapshot)=>{
+        context.commit('setMounth',(snapshot))
+    })
+  },
   daily(context){
     return service.daily().then((snapshot)=>{
-        context.commit('setDaily',(snapshot))
+      context.commit('setDaily',(snapshot))
     })
   }
+
 };
 export default {
   state,
