@@ -8,7 +8,6 @@ export default {
   confirmedPerson() {
     return http.get('/')
       .then((res) => {
-        console.log(res.data.confirmed.value)
         return res.data.confirmed.value;
       })
   },
@@ -16,7 +15,29 @@ export default {
     return http.get('/confirmed')
       .then((res) => {
         return res.data;
+      }).then((res)=>{
+        let obj1=[]
+        for (let i = 0; i<10;i++){
+          obj1.push({
+            country:res[i].countryRegion,
+            province:res[i].combinedKey,
+            confirmed:res[i].confirmed,
+            counter:i+1,
+          })
+        }
+        for(let i=0;i<res.length;i++){
+          if (res[i].countryRegion==='Turkey'){
+            obj1.push({
+              country:res[i].countryRegion,
+              province:res[i].combinedKey,
+              confirmed:res[i].confirmed,
+              counter:i+1,
+            })
+          }
+        }
+        return obj1
       })
+
   },
   recorvedPerson() {
     return http.get('/')
@@ -40,6 +61,27 @@ export default {
     return http.get('/deaths')
       .then((res) => {
         return res.data
+      }).then((res)=>{
+        let obj=[]
+        for (let i = 0; i<10;i++){
+          obj.push({
+            country:res[i].countryRegion,
+            province:res[i].combinedKey,
+            deaths:res[i].deaths,
+            counter:i+1,
+          })
+        }
+        for(let i=0;i<res.length;i++){
+          if (res[i].countryRegion==='Turkey'){
+            obj.push({
+              country:res[i].countryRegion,
+              province:res[i].combinedKey,
+              deaths:res[i].deaths,
+              counter:i+1,
+            })
+          }
+        }
+        return obj
       })
   },
   countryDetail(countryName) {

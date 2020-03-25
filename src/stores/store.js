@@ -2,30 +2,22 @@ import service from '../services/service'
 
 const state = {
   confirmedPerson:null,
+  deathPerson:null,
   confirmedDetail:{},
+  deathDetail:{},
   countryInfo:{},
   daily:{},
+  ifConfirmedDetail:false,
   ifDaily:false,
   ifMounth:false,
+  ifDeathDetail:false,
   mounth:{},
 
 };
 const getters = {
 
    countryConfirmed(state) {
-     let obj=[]
-     let len = state.confirmedDetail.length
-     for (let i=0;i<10;i++){
-        obj.push(state.confirmedDetail[i])
-     }
-     for (let i=0;i<len;i++){
-       if (state.confirmedDetail[i].countryRegion == 'Turkey'){
-         state.confirmedDetail[i].sira=i+1
-         obj.push(state.confirmedDetail[i])
-       }
-     }
-     console.log(obj)
-     return obj;
+
    }
 };
 const mutations = {
@@ -34,9 +26,17 @@ const mutations = {
   },
   setConfirmedDetail(state,data){
     state.confirmedDetail=data;
+    state.ifConfirmedDetail=true;
   },
   setCountryDetail(state,data) {
     state.countryInfo=data;
+  },
+  setDeathsPerson(state,data){
+    state.deathPerson=data;
+  },
+  setDeathsDetail(state,data){
+    state.deathDetail=data;
+    state.ifDeathDetail=true;
   },
   setMounth(state,data){
     state.mounth=data;
@@ -73,13 +73,13 @@ const actions = {
 
   },
   deathsPerson(context) {
-    return service.confirmedDeatil().then((snapshot)=>{
-      context.commit('setConfirmedDetail',(snapshot))
+    return service.deathsPerson().then((snapshot)=>{
+      context.commit('setDeathsPerson',(snapshot))
     })
   },
   deathsDetail(context) {
-    return service.confirmedDeatil().then((snapshot)=>{
-      context.commit('setConfirmedDetail',(snapshot))
+    return service.deathsDetail().then((snapshot)=>{
+      context.commit('setDeathsDetail',(snapshot))
     })
   },
   countryDetail(context,country) {

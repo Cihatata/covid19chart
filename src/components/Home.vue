@@ -7,16 +7,24 @@
       </div>
       <section class="Home-info-confirmedDetail">
         <div class="Home-info-confirmedDetail-scroll">
-          <top10 v-if="countryConfirmed!==undefined" :country-data="countryConfirmed"></top10>
+          <top10 v-if="$store.state.ifConfirmedDetail" :country-data="confirmedDetail"></top10>
         </div>
       </section>
     </div>
     <div class="six columns Home-info">
-      <confirmedChart v-if="$store.state.ifDaily" :labels="arr1" :confirmed="this.$store.state.daily" ></confirmedChart>
+      <confirmedChart v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></confirmedChart>
       <logirithmic v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></logirithmic>
     </div>
-    <div v-if="$store.state.ifDaily" class="three columns as Home-info">
-      {{this.$store.state.daily[2]}}
+    <div v-if="$store.state.ifDaily" class="three columns Home-info">
+      <div class="Home-info-confirmedPerson">
+        <h3>Toplam Vaka Sayisi</h3>
+        <h4>{{deathsPerson}}</h4>
+      </div>
+      <section class="Home-info-confirmedDetail">
+        <div class="Home-info-confirmedDetail-scroll">
+          <deathstop10 v-if="$store.state.ifDeathDetail" :death-data="deathDetail"></deathstop10>
+        </div>
+      </section>
     </div>
 
   </section>
@@ -26,24 +34,27 @@
   import {mapGetters} from 'vuex';
   import top10 from './top10'
   import logirithmic from "./logirithmic";
+  import deathstop10 from "./deathstop10";
 
   export default {
     name: "Home",
-    data(){
-      return{
-        arr1:this.$store.state.daily[0],
-        arr2:[10,20,30,40,50,60,70,80,90,101,103,140]
-      }
+    data() {
+      return {}
     },
     mounted() {
-      this.$store.dispatch('daily').then(()=>{
+      this.$store.dispatch('daily').then(() => {
 
+      });
+      this.$store.dispatch('deathsDetail').then(() => {
       })
+      this.$store.dispatch('confirmedDetail').then(() => {
+      });
     },
     created() {
-      this.$store.dispatch('confirmedPerson').then(() => {
+      this.$store.dispatch('deathsPerson').then(() => {
+
       });
-      this.$store.dispatch('confirmedDetail').then(() => {
+      this.$store.dispatch('confirmedPerson').then(() => {
       });
     },
 
@@ -51,28 +62,27 @@
       confirmedPersonn() {
         return this.$store.state.confirmedPerson
       },
+      deathsPerson() {
+        return this.$store.state.deathPerson
+      },
       ...mapGetters([
         'countryConfirmed'
-      ])
+      ]),
+      deathDetail() {
+        return this.$store.state.deathDetail;
+      },
+      confirmedDetail(){
+        return this.$store.state.confirmedDetail;
+      }
     },
     components: {
       top10,
       confirmedChart,
       logirithmic,
+      deathstop10,
     }
   }
-  // new chart(document.getElementById('my-chart'), {
-  //   type: 'line',
-  //   data: {
-  //     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  //     datasets: [
-  //       {
-  //         label: '2018 Sales',
-  //         data: [300, 700, 450, 750, 450]
-  //       }
-  //     ]
-  //   }
-  // });
+
 </script>
 
 <style lang="scss" scoped>
@@ -136,10 +146,11 @@
         border-radius: 7px;
         box-shadow: 7px 10px 10px -1px rgba($koyu, 0.6);
         box-sizing: border-box;
-        &-scroll{
+
+        &-scroll {
           overflow: scroll;
           height: 53vh;
-          @include mq(){
+          @include mq() {
             height: 100%;
             overflow: visible;
           }

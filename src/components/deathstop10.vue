@@ -1,15 +1,15 @@
 <template>
   <section>
-    <div v-for="(item) in countryData">
+    <div v-for="(item) in deathData">
       <div  class="element ">
         <div  class="element-countryName">
           {{ item.counter }}-{{item.province}}
         </div>
-        <!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->
-        <!--          ({{item.provinceState}})-->
-        <!--        </div>-->
+<!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->
+<!--          ({{item.provinceState}})-->
+<!--        </div>-->
         <div class="element-confirmed">
-          {{item.confirmed}}
+          {{item.deaths}}
         </div>
       </div>
     </div>
@@ -19,10 +19,14 @@
 
 <script>
   export default {
-    name: "top10",
+    name: "deathstop10",
+    data() {
+      return {
 
+      }
+    },
     props: {
-      countryData: {type: Array, required: true}
+      deathData: {type: Array, required: true}
     },
   }
 </script>
