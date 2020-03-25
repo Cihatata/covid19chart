@@ -17,7 +17,7 @@
     </div>
     <div v-if="$store.state.ifDaily" class="three columns Home-info">
       <div class="Home-info-confirmedPerson">
-        <h3>Toplam Vaka Sayisi</h3>
+        <h3>Toplam Olu sayisi</h3>
         <h4>{{deathsPerson}}</h4>
       </div>
       <section class="Home-info-confirmedDetail">
@@ -48,6 +48,8 @@
       this.$store.dispatch('deathsDetail').then(() => {
       })
       this.$store.dispatch('confirmedDetail').then(() => {
+      });
+      this.$store.dispatch('countryDaily').then(() => {
       });
     },
     created() {

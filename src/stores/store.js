@@ -92,6 +92,11 @@ const actions = {
         context.commit('setMounth',(snapshot))
     })
   },
+  countryDaily(context){
+    return service.countryDaily().then((snapshot)=>{
+      context.commit('setCountryDetail',(snapshot))
+    })
+  },
   daily(context){
     return service.daily().then((snapshot)=>{
       context.commit('setDaily',(snapshot))

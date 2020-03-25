@@ -3,7 +3,7 @@
 
   export default {
     extends: Line,
-   
+
     props: {
       confirmed: {type: Array, required: true},
     },

@@ -3,34 +3,37 @@ import axios from 'axios'
 const http = axios.create({
   baseURL: 'https://covid19.mathdro.id/api',
 });
+const request =axios.create({
+  baseURL:'https://corona.lmao.ninja'
+})
 
 export default {
   confirmedPerson() {
-    return http.get('/')
+    return request.get('/all')
       .then((res) => {
-        return res.data.confirmed.value;
+        return res.data.cases;
       })
   },
   confirmedDeatil() {
-    return http.get('/confirmed')
+    return request.get('/countries?sort=cases')
       .then((res) => {
         return res.data;
       }).then((res)=>{
         let obj1=[]
         for (let i = 0; i<10;i++){
           obj1.push({
-            country:res[i].countryRegion,
-            province:res[i].combinedKey,
-            confirmed:res[i].confirmed,
+            country:res[i].country,
+            province:res[i].country,
+            confirmed:res[i].cases,
             counter:i+1,
           })
         }
         for(let i=0;i<res.length;i++){
-          if (res[i].countryRegion==='Turkey'){
+          if (res[i].country==='Turkey'){
             obj1.push({
-              country:res[i].countryRegion,
-              province:res[i].combinedKey,
-              confirmed:res[i].confirmed,
+              country:res[i].country,
+              province:res[i].country,
+              confirmed:res[i].cases,
               counter:i+1,
             })
           }
@@ -52,30 +55,30 @@ export default {
       })
   },
   deathsPerson() {
-    return http.get('/')
+    return request.get('/all')
       .then((res) => {
-        return res.data.deaths.value
+        return res.data.deaths
       })
   },
   deathsDetail() {
-    return http.get('/deaths')
+    return request.get('/countries?sort=deaths')
       .then((res) => {
         return res.data
       }).then((res)=>{
         let obj=[]
         for (let i = 0; i<10;i++){
           obj.push({
-            country:res[i].countryRegion,
-            province:res[i].combinedKey,
+            country:res[i].country,
+            province:res[i].country,
             deaths:res[i].deaths,
             counter:i+1,
           })
         }
         for(let i=0;i<res.length;i++){
-          if (res[i].countryRegion==='Turkey'){
+          if (res[i].country==='Turkey'){
             obj.push({
-              country:res[i].countryRegion,
-              province:res[i].combinedKey,
+              country:res[i].country,
+              province:res[i].country,
               deaths:res[i].deaths,
               counter:i+1,
             })
@@ -87,7 +90,13 @@ export default {
   countryDetail(countryName) {
     return http.get(`/confirmed/${countryName}`)
       .then((res) => {
-        return res.data.value
+
+      })
+  },
+  countryDaily(){
+    return request.get('https://corona.lmao.ninja/v2/historical/turkey')
+      .then((res)=>{
+        console.log(res.data.timeline.cases["1/24/20"])
       })
   },
   daily() {

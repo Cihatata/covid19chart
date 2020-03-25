@@ -42,7 +42,7 @@
 
     align-items: center;
     @include mq(){
-      height: 120px;
+      height: 90px;
     }
     &-logo {
       img{
