@@ -49,7 +49,8 @@
       })
       this.$store.dispatch('confirmedDetail').then(() => {
       });
-      this.$store.dispatch('countryDaily').then(() => {
+      this.$store.dispatch('countryDaily',"italy").then(() => {
+
       });
     },
     created() {

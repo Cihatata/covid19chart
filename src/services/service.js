@@ -3,8 +3,8 @@ import axios from 'axios'
 const http = axios.create({
   baseURL: 'https://covid19.mathdro.id/api',
 });
-const request =axios.create({
-  baseURL:'https://corona.lmao.ninja'
+const request = axios.create({
+  baseURL: 'https://corona.lmao.ninja'
 })
 
 export default {
@@ -18,23 +18,23 @@ export default {
     return request.get('/countries?sort=cases')
       .then((res) => {
         return res.data;
-      }).then((res)=>{
-        let obj1=[]
-        for (let i = 0; i<10;i++){
+      }).then((res) => {
+        let obj1 = []
+        for (let i = 0; i < 10; i++) {
           obj1.push({
-            country:res[i].country,
-            province:res[i].country,
-            confirmed:res[i].cases,
-            counter:i+1,
+            country: res[i].country,
+            province: res[i].country,
+            confirmed: res[i].cases,
+            counter: i + 1,
           })
         }
-        for(let i=0;i<res.length;i++){
-          if (res[i].country==='Turkey'){
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].country === 'Turkey') {
             obj1.push({
-              country:res[i].country,
-              province:res[i].country,
-              confirmed:res[i].cases,
-              counter:i+1,
+              country: res[i].country,
+              province: res[i].country,
+              confirmed: res[i].cases,
+              counter: i + 1,
             })
           }
         }
@@ -64,23 +64,23 @@ export default {
     return request.get('/countries?sort=deaths')
       .then((res) => {
         return res.data
-      }).then((res)=>{
-        let obj=[]
-        for (let i = 0; i<10;i++){
+      }).then((res) => {
+        let obj = []
+        for (let i = 0; i < 10; i++) {
           obj.push({
-            country:res[i].country,
-            province:res[i].country,
-            deaths:res[i].deaths,
-            counter:i+1,
+            country: res[i].country,
+            province: res[i].country,
+            deaths: res[i].deaths,
+            counter: i + 1,
           })
         }
-        for(let i=0;i<res.length;i++){
-          if (res[i].country==='Turkey'){
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].country === 'Turkey') {
             obj.push({
-              country:res[i].country,
-              province:res[i].country,
-              deaths:res[i].deaths,
-              counter:i+1,
+              country: res[i].country,
+              province: res[i].country,
+              deaths: res[i].deaths,
+              counter: i + 1,
             })
           }
         }
@@ -93,11 +93,41 @@ export default {
 
       })
   },
-  countryDaily(){
-    return request.get('https://corona.lmao.ninja/v2/historical/turkey')
-      .then((res)=>{
-        console.log(res.data.timeline.cases["1/24/20"])
-      })
+  countryDaily(countryName) {
+    // return request.get('https://corona.lmao.ninja/v2/historical/' + countryName)
+    //   .then((res) => {
+    //     console.log(countryName)
+    //     let gun = 1;
+    //     let ay = 1;
+    //     let yil = 20;
+    //     let tarih = gun + '/' + ay + '/' + yil
+    //     let turkey = {veri: [], ulke: ''}
+    //     turkey.ulke = countryName
+    //     for (var i = 1; i < 4; i++) {
+    //       for (var t = 1; t < 32; t++) {
+    //         let tarih2 = i + '/' + t + '/' + yil;
+    //         if (res.data.timeline.cases[tarih2] !== undefined) {
+    //           turkey.veri.push({x: '2020-' + t + '-' + i, y: res.data.timeline.cases[tarih2]})
+    //         }
+    //       }
+    //     }
+    //     console.log(veri)
+    //     return turkey;
+    //   })
+
+    const requestOne = request.get('/countries/turkey');
+    const requestTwo = request.get('/countries/china');
+    const requestThree = request.get('/countries/spain');
+
+   return  axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
+      const responseOne = responses[0].data
+      const responseTwo = responses[1].data
+      const responesThree = responses[2].data
+      let arr=[responseOne,responseTwo,responesThree]
+     console.log(arr) ;
+    })).catch(errors => {
+      // react on errors.
+    })
   },
   daily() {
     return http.get('/daily')
@@ -126,187 +156,186 @@ export default {
 
         }
 
-  console.log(objTotalConfirmed)
-  return [objOtherLocations,objMainlandChina,objTotalConfirmed];
-})
-},
-mounth()
-{
-  return http.get('/daily')
-    .then((res) => {
-      console.log(res.data[0]);
-      for (let i = 0; i < res.data.length; i++) {
-        let month = parseInt(res.data[i].reportDate.slice(5, 7))
-        switch (month) {
-          case 1 :
-            res.data[i].reportDate = 'Ocak'
-            break;
-          case 2:
-            res.data[i].reportDate = 'Subat'
-            break;
-          case 3:
-            res.data[i].reportDate = 'Mart'
-            break;
-          case 4:
-            res.data[i].reportDate = 'Nisan'
-            break;
-          case 5:
-            res.data[i].reportDate = 'Mayis'
-            break;
-          case 6:
-            res.data[i].reportDate = 'Haziran'
-            break;
-          case 7:
-            res.data[i].reportDate = 'Temmuz'
-            break;
-          case 8:
-            res.data[i].reportDate = 'Agustos'
-            break;
-          case 9:
-            res.data[i].reportDate = 'Eylul'
-            break;
-          case 10:
-            res.data[i].reportDate = 'Ekim'
-            break;
-          case 11:
-            res.data[i].reportDate = 'Kasim'
-            break;
-          case 12:
-            res.data[i].reportDate = 'Aralik'
-            break;
+        console.log(objTotalConfirmed)
+        return [objOtherLocations, objMainlandChina, objTotalConfirmed];
+      })
+  },
+  mounth() {
+    return http.get('/daily')
+      .then((res) => {
+        console.log(res.data[0]);
+        for (let i = 0; i < res.data.length; i++) {
+          let month = parseInt(res.data[i].reportDate.slice(5, 7))
+          switch (month) {
+            case 1 :
+              res.data[i].reportDate = 'Ocak'
+              break;
+            case 2:
+              res.data[i].reportDate = 'Subat'
+              break;
+            case 3:
+              res.data[i].reportDate = 'Mart'
+              break;
+            case 4:
+              res.data[i].reportDate = 'Nisan'
+              break;
+            case 5:
+              res.data[i].reportDate = 'Mayis'
+              break;
+            case 6:
+              res.data[i].reportDate = 'Haziran'
+              break;
+            case 7:
+              res.data[i].reportDate = 'Temmuz'
+              break;
+            case 8:
+              res.data[i].reportDate = 'Agustos'
+              break;
+            case 9:
+              res.data[i].reportDate = 'Eylul'
+              break;
+            case 10:
+              res.data[i].reportDate = 'Ekim'
+              break;
+            case 11:
+              res.data[i].reportDate = 'Kasim'
+              break;
+            case 12:
+              res.data[i].reportDate = 'Aralik'
+              break;
+          }
         }
-      }
-      return res
-    }).then((res) => {
-      var len = res.data.length;
-      var obj = {
-        Ocak: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Subat: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Mart: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Nisan: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Mayis: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Haziran: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Temmuz: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Agustos: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Eylul: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Ekim: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Kasim: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
-        },
-        Aralik: {
-          total: 0,
-          china: 0,
-          outsideChina: 0
+        return res
+      }).then((res) => {
+        var len = res.data.length;
+        var obj = {
+          Ocak: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Subat: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Mart: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Nisan: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Mayis: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Haziran: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Temmuz: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Agustos: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Eylul: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Ekim: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Kasim: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          },
+          Aralik: {
+            total: 0,
+            china: 0,
+            outsideChina: 0
+          }
         }
-      }
 
-      for (let i = 0; i < len; i++) {
-        switch (res.data[i].reportDate) {
-          case "Ocak":
-            obj.Ocak.total += res.data[i].totalConfirmed
-            obj.Ocak.china += res.data[i].mainlandChina
-            obj.Ocak.outsideChina += res.data[i].otherLocations
-            break;
-          case "Subat":
-            obj.Subat.total += res.data[i].totalConfirmed
-            obj.Subat.china += res.data[i].mainlandChina
-            obj.Subat.outsideChina += res.data[i].otherLocations
-            break;
-          case "Mart":
-            obj.Mart.total += res.data[i].totalConfirmed
-            obj.Mart.china += res.data[i].mainlandChina
-            obj.Mart.outsideChina += res.data[i].otherLocations
-            break;
-          case "Nisan":
-            obj.Nisan.total += res.data[i].totalConfirmed
-            obj.Nisan.china += res.data[i].mainlandChina
-            obj.Nisan.outsideChina += res.data[i].otherLocations
-            break;
-          case "Mayis":
-            obj.Mayis.total += res.data[i].totalConfirmed
-            obj.Mayis.china += res.data[i].mainlandChina
-            obj.Mayis.outsideChina += res.data[i].otherLocations
-            break;
-          case "Haziran":
-            obj.Haziran.total += res.data[i].totalConfirmed
-            obj.Haziran.china += res.data[i].mainlandChina
-            obj.Haziran.outsideChina += res.data[i].otherLocations
-            break;
-          case "Temmuz":
-            obj.Temmuz.total += res.data[i].totalConfirmed
-            obj.Temmuz.china += res.data[i].mainlandChina
-            obj.Temmuz.outsideChina += res.data[i].otherLocations
-            break;
-          case "Agustos":
-            obj.Agustos.total += res.data[i].totalConfirmed
-            obj.Agustos.china += res.data[i].mainlandChina
-            obj.Agustos.outsideChina += res.data[i].otherLocations
-            break;
-          case "Eylul":
-            obj.Eylul.total += res.data[i].totalConfirmed
-            obj.Eylul.china += res.data[i].mainlandChina
-            obj.Eylul.outsideChina += res.data[i].otherLocations
-            break;
-          case "Ekim":
-            obj.Ekim.total += res.data[i].totalConfirmed
-            obj.Ekim.china += res.data[i].mainlandChina
-            obj.Ekim.outsideChina += res.data[i].otherLocations
-            break;
-          case "Kasim":
-            obj.Kasim.total += res.data[i].totalConfirmed
-            obj.Kasim.china += res.data[i].mainlandChina
-            obj.Kasim.outsideChina += res.data[i].otherLocations
-            break;
-          case "Aralik":
-            obj.Aralik.total += res.data[i].totalConfirmed
-            obj.Aralik.china += res.data[i].mainlandChina
-            obj.Aralik.outsideChina += res.data[i].otherLocations
-            break;
+        for (let i = 0; i < len; i++) {
+          switch (res.data[i].reportDate) {
+            case "Ocak":
+              obj.Ocak.total += res.data[i].totalConfirmed
+              obj.Ocak.china += res.data[i].mainlandChina
+              obj.Ocak.outsideChina += res.data[i].otherLocations
+              break;
+            case "Subat":
+              obj.Subat.total += res.data[i].totalConfirmed
+              obj.Subat.china += res.data[i].mainlandChina
+              obj.Subat.outsideChina += res.data[i].otherLocations
+              break;
+            case "Mart":
+              obj.Mart.total += res.data[i].totalConfirmed
+              obj.Mart.china += res.data[i].mainlandChina
+              obj.Mart.outsideChina += res.data[i].otherLocations
+              break;
+            case "Nisan":
+              obj.Nisan.total += res.data[i].totalConfirmed
+              obj.Nisan.china += res.data[i].mainlandChina
+              obj.Nisan.outsideChina += res.data[i].otherLocations
+              break;
+            case "Mayis":
+              obj.Mayis.total += res.data[i].totalConfirmed
+              obj.Mayis.china += res.data[i].mainlandChina
+              obj.Mayis.outsideChina += res.data[i].otherLocations
+              break;
+            case "Haziran":
+              obj.Haziran.total += res.data[i].totalConfirmed
+              obj.Haziran.china += res.data[i].mainlandChina
+              obj.Haziran.outsideChina += res.data[i].otherLocations
+              break;
+            case "Temmuz":
+              obj.Temmuz.total += res.data[i].totalConfirmed
+              obj.Temmuz.china += res.data[i].mainlandChina
+              obj.Temmuz.outsideChina += res.data[i].otherLocations
+              break;
+            case "Agustos":
+              obj.Agustos.total += res.data[i].totalConfirmed
+              obj.Agustos.china += res.data[i].mainlandChina
+              obj.Agustos.outsideChina += res.data[i].otherLocations
+              break;
+            case "Eylul":
+              obj.Eylul.total += res.data[i].totalConfirmed
+              obj.Eylul.china += res.data[i].mainlandChina
+              obj.Eylul.outsideChina += res.data[i].otherLocations
+              break;
+            case "Ekim":
+              obj.Ekim.total += res.data[i].totalConfirmed
+              obj.Ekim.china += res.data[i].mainlandChina
+              obj.Ekim.outsideChina += res.data[i].otherLocations
+              break;
+            case "Kasim":
+              obj.Kasim.total += res.data[i].totalConfirmed
+              obj.Kasim.china += res.data[i].mainlandChina
+              obj.Kasim.outsideChina += res.data[i].otherLocations
+              break;
+            case "Aralik":
+              obj.Aralik.total += res.data[i].totalConfirmed
+              obj.Aralik.china += res.data[i].mainlandChina
+              obj.Aralik.outsideChina += res.data[i].otherLocations
+              break;
+          }
         }
-      }
-      return obj;
-    })
-}
+        return obj;
+      })
+  }
 }

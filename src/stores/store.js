@@ -6,6 +6,7 @@ const state = {
   confirmedDetail:{},
   deathDetail:{},
   countryInfo:{},
+  countryDaily:{},
   daily:{},
   ifConfirmedDetail:false,
   ifDaily:false,
@@ -45,6 +46,9 @@ const mutations = {
   setDaily(state,data){
     state.daily=data;
     state.ifDaily=true
+  },
+  setCountryDaily(state,data){
+    state.countryDaily=data;
   }
 
 };
@@ -92,9 +96,9 @@ const actions = {
         context.commit('setMounth',(snapshot))
     })
   },
-  countryDaily(context){
-    return service.countryDaily().then((snapshot)=>{
-      context.commit('setCountryDetail',(snapshot))
+  countryDaily(context,countryName){
+    return service.countryDaily(countryName).then((snapshot)=>{
+      context.commit('setCountryDaily',(snapshot))
     })
   },
   daily(context){
