@@ -1,30 +1,48 @@
 <template>
   <section class="Home">
     <div class="three columns Home-info">
-      <div class="Home-info-confirmedPerson">
-        <h3>Toplam Vaka Sayisi</h3>
-        <h4>{{confirmedPersonn}}</h4>
-      </div>
-      <section class="Home-info-confirmedDetail">
-        <div class="Home-info-confirmedDetail-scroll">
-          <top10 v-if="$store.state.ifConfirmedDetail" :country-data="confirmedDetail"></top10>
+      <loading class="loading" v-if="!$store.state.ifDaily"></loading>
+      <div v-else>
+        <div class="Home-info-confirmedPerson" id="confirmed">
+          <h3>Toplam Vaka</h3>
+          <h4>{{confirmedPersonn}}</h4>
         </div>
-      </section>
+        <section class="Home-info-confirmedDetail">
+          <div class="Home-info-confirmedDetail-scroll">
+            <top10 v-if="$store.state.ifConfirmedDetail" :country-data="confirmedDetail"></top10>
+          </div>
+        </section>
+      </div>
     </div>
     <div class="six columns Home-info">
+      <h1 id="grafik">Grafikler</h1>
+      <hr>
       <confirmedChart v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></confirmedChart>
       <logirithmic v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></logirithmic>
-    </div>
-    <div v-if="$store.state.ifDaily" class="three columns Home-info">
-      <div class="Home-info-confirmedPerson">
-        <h3>Toplam Olu sayisi</h3>
-        <h4>{{deathsPerson}}</h4>
-      </div>
-      <section class="Home-info-confirmedDetail">
-        <div class="Home-info-confirmedDetail-scroll">
-          <deathstop10 v-if="$store.state.ifDeathDetail" :death-data="deathDetail"></deathstop10>
+      <div class="row">
+        <div class="one-half column">
+          <comparisonConfirmed v-if="$store.state.ifCountryDaily"
+          :confirmeddata="this.$store.state.countryDaily"></comparisonConfirmed>
         </div>
-      </section>
+        <div class="one-half column">
+          <logCompConfirmed v-if="$store.state.ifCountryDaily"
+                               :confirmeddata="this.$store.state.countryDaily"></logCompConfirmed>
+        </div>
+      </div>
+    </div>
+    <div class="three columns Home-info">
+      <loading v-if="!$store.state.ifDeathDetail" ></loading>
+      <div v-else>
+        <div class="Home-info-deathsPerson">
+          <h3>Toplam Ölüm</h3>
+          <h4>{{deathsPerson}}</h4>
+        </div>
+        <section class="Home-info-deathsDetail">
+          <div class="Home-info-deathsDetail-scroll">
+            <deathstop10 v-if="$store.state.ifDeathDetail" :death-data="deathDetail"></deathstop10>
+          </div>
+        </section>
+      </div>
     </div>
 
   </section>
@@ -35,6 +53,9 @@
   import top10 from './top10'
   import logirithmic from "./logirithmic";
   import deathstop10 from "./deathstop10";
+  import comparisonConfirmed from "./comparisonConfirmed";
+  import loading from "./loading"
+  import logCompConfirmed from "./logCompConfirmed";
 
   export default {
     name: "Home",
@@ -49,9 +70,10 @@
       })
       this.$store.dispatch('confirmedDetail').then(() => {
       });
-      this.$store.dispatch('countryDaily',"italy").then(() => {
+      this.$store.dispatch('countryDaily').then(() => {
 
       });
+
     },
     created() {
       this.$store.dispatch('deathsPerson').then(() => {
@@ -74,8 +96,11 @@
       deathDetail() {
         return this.$store.state.deathDetail;
       },
-      confirmedDetail(){
+      confirmedDetail() {
         return this.$store.state.confirmedDetail;
+      },
+      comparisonChart() {
+        return this.$store.state.countryDaily;
       }
     },
     components: {
@@ -83,6 +108,9 @@
       confirmedChart,
       logirithmic,
       deathstop10,
+      comparisonConfirmed,
+      loading,
+      logCompConfirmed
     }
   }
 
@@ -93,7 +121,7 @@
   @import "../assets/css/base/mixin";
 
   .Home {
-    background-color: antiquewhite;
+    background-color: ghostwhite;
     position: absolute;
     width: 100%;
     //height: 100%;
@@ -105,6 +133,17 @@
 
     &-info {
       overflow: visible;
+      text-align: center;
+
+      h1 {
+        color: #025209;
+        font-weight: 600;
+        font-size: 48px;
+        letter-spacing: 2px;
+        @include mq('') {
+          font-size: 64px;
+        }
+      }
 
       &-confirmedPerson {
         width: 100%;
@@ -114,12 +153,13 @@
         justify-content: center;
         text-align: center;
         border-radius: 7px;
-        box-shadow: 7px 10px 10px -1px rgba($koyu, 0.6);
+        box-shadow: 3px 3px 30px -1px rgba($koyu, 0.6);
         background-color: $acikkirmizi;
         margin-bottom: 20px;
+        border: 3px solid #290212;
 
         h4 {
-          color: darkred;
+          color: #150000;
           font-size: 18vw;
           letter-spacing: 3px;
           font-weight: 600;
@@ -147,8 +187,75 @@
         background-color: $acikkirmizi;
         padding: 4px 6px;
         border-radius: 7px;
-        box-shadow: 7px 10px 10px -1px rgba($koyu, 0.6);
+        box-shadow: 5px 2px 20px -1px rgba(41, 2, 18, 0.6);
         box-sizing: border-box;
+        margin-bottom: 40px;
+        @include mq('tablet') {
+          margin-bottom: 0;
+        }
+
+        &-scroll {
+          overflow: scroll;
+          height: 53vh;
+          @include mq() {
+            height: 100%;
+            overflow: visible;
+          }
+        }
+
+      }
+
+      &-deathsPerson {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 7px;
+        box-shadow: 3px 3px 30px -1px rgba($koyu, 0.6);
+        background-color: $yeni;
+        margin-bottom: 20px;
+        margin-top: 60px;
+        border: 3px solid #117a8b;
+        @include mq("tablet") {
+          margin-top: 0;
+        }
+
+        h4 {
+          color: #b81611;
+          font-size: 18vw;
+          letter-spacing: 3px;
+          font-weight: 600;
+          //text-shadow: -2px 0 gray, 0 2px gray, 2px 0 $koyu, 0 -2px $koyu;
+          @include mq("tablet") {
+            font-size: 3vw;
+            //text-shadow: -1px 0 $koyu, 0 1px $koyu, 1px 0 $koyu, 0 -1px $koyu;
+          }
+        }
+
+        h3 {
+          font-weight: bold;
+          margin-bottom: 0;
+          margin-top: 20px;
+          color: #990c0a;
+          font-size: 9vw;
+          @include mq() {
+            font-size: 2vw;
+          }
+        }
+      }
+
+      &-deathsDetail {
+        background-color: #117a8b;
+        padding: 4px 6px;
+        border-radius: 7px;
+        box-shadow: 5px 2px 20px -1px rgba(41, 2, 18, 0.6);
+        box-sizing: border-box;
+        margin-bottom: 40px;
+        @include mq('tablet') {
+          margin-bottom: 0;
+        }
 
         &-scroll {
           overflow: scroll;
@@ -159,6 +266,10 @@
           }
         }
       }
+    }
+
+    .loading {
+      text-align: center;
     }
 
     .as {

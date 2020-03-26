@@ -1,14 +1,14 @@
 <template>
   <section>
     <div v-for="(item) in deathData">
-      <div  class="element ">
-        <div  class="element-countryName">
+      <div  class="elementDeath ">
+        <div  class="elementDeath-countryName">
           {{ item.counter }}-{{item.province}}
         </div>
 <!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->
 <!--          ({{item.provinceState}})-->
 <!--        </div>-->
-        <div class="element-confirmed">
+        <div class="elementDeath-confirmed">
           {{item.deaths}}
         </div>
       </div>
@@ -36,13 +36,13 @@
   @import "../assets/css/base/color";
 
 
-  .element {
+  .elementDeath {
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: $koyu;
+    background-color: $yeni;
     margin-bottom: 5px;
     margin-top: 8px;
     box-sizing: border-box;

@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import VueScroll from 'vue-scrollto'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VueScroll)
 
 import routerOptions from './router/route'
 import  storeOptions from './stores/store'

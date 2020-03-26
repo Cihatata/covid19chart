@@ -4,8 +4,8 @@
      <img  src="../assets/analizlogo.png" alt="">
    </div>
    <div class="header-menu" :class="{show : isActive}">
-     <button class="button">ANA SAYFA</button>
-     <button class="button">Turkiye</button>
+     <button v-scroll-to="{ element: '#grafik', duration: 2000 }" class="button" href="#confirmed">ANA SAYFA</button>
+     <button class="button" href="#grafik">Turkiye</button>
      <button class="button">Kiyasla</button>
      <button class="button">Bilgi</button>
    </div>
@@ -34,15 +34,15 @@
   .header{
     width: 100%;
     height: 100px;
-    background-color: #222222;
+    background-color: #023308;
     display: flex;
     position: relative;
     padding: 0 20px;
     box-sizing: border-box;
-
     align-items: center;
     @include mq(){
       height: 90px;
+      position: relative;
     }
     &-logo {
       img{
@@ -66,7 +66,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: $acikkirmizi;
+      background-color: antiquewhite;
       padding: 20px;
       box-shadow: 0 10px 10px rgba(black, .2);
       transform: translateX(-100%);
@@ -109,6 +109,7 @@
       border-radius: 4px;
       margin-bottom: 3px;
       margin-left: auto;
+      margin-top: 10px;
       svg{
         color: #cfd0d2;
       }

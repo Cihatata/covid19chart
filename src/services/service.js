@@ -2,10 +2,32 @@ import axios from 'axios'
 
 const http = axios.create({
   baseURL: 'https://covid19.mathdro.id/api',
+
 });
 const request = axios.create({
-  baseURL: 'https://corona.lmao.ninja'
+  baseURL: 'https://corona.lmao.ninja',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 })
+
+function createObjectforChart(obj) {
+  let gun = 32;
+  let ay = 5;
+  let yil = 20;
+  let newObje = {date: [], name: ''}
+  newObje.name = obj.country
+  for (var i = 1; i < ay; i++) {
+    for (var t = 1; t < gun; t++) {
+      let tarih2 = i + '/' + t + '/' + yil;
+
+      if (obj.timeline.cases[tarih2] !== undefined) {
+        newObje.date.push({x: '2020-' + i + '-' + t, y: obj.timeline.cases[tarih2]})
+      }
+    }
+  }
+  return newObje;
+}
 
 export default {
   confirmedPerson() {
@@ -115,19 +137,34 @@ export default {
     //     return turkey;
     //   })
 
-    const requestOne = request.get('/countries/turkey');
-    const requestTwo = request.get('/countries/china');
-    const requestThree = request.get('/countries/spain');
+    const requestOne = request.get('/v2/historical/turkey', );
+    const requestTwo = request.get('/v2/historical/iran');
+    const requestThree = request.get('/v2/historical/france');
+    const requestFour = request.get('/v2/historical/spain');
+    const requestFive = request.get('/v2/historical/usa');
+    const requestSix = request.get('/v2/historical/S. Korea');
+    const requestSeven = request.get('/v2/historical/italy');
+    //const requestNine = request.get('/historical/UK');
 
-   return  axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
-      const responseOne = responses[0].data
-      const responseTwo = responses[1].data
-      const responesThree = responses[2].data
-      let arr=[responseOne,responseTwo,responesThree]
-     console.log(arr) ;
-    })).catch(errors => {
-      // react on errors.
-    })
+
+    return axios.all([requestOne, requestTwo, requestThree, requestFour,requestFive,requestSix,requestSeven])
+      .then(axios.spread((...responses) => {
+        const responseOne = createObjectforChart(responses[0].data)
+        const responseTwo = createObjectforChart(responses[1].data)
+        const responesThree = createObjectforChart(responses[2].data)
+        const responesFour = createObjectforChart(responses[3].data)
+        const responesFive = createObjectforChart(responses[4].data)
+        const responesSix = createObjectforChart(responses[5].data)
+        const responesSeven = createObjectforChart(responses[6].data)
+        //const responesEight = createObjectforChart(responses[7].data)
+       // const responesNine = createObjectforChart(responses[8].data)
+
+        let arr = [responseOne, responseTwo, responesThree,responesFour,responesFive,responesSix,responesSeven]
+        console.log(arr);
+        return arr;
+      })).catch(errors => {
+        // react on errors.
+      })
   },
   daily() {
     return http.get('/daily')

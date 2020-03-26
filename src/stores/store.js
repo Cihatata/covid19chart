@@ -6,9 +6,10 @@ const state = {
   confirmedDetail:{},
   deathDetail:{},
   countryInfo:{},
-  countryDaily:{},
+  countryDaily:[],
   daily:{},
   ifConfirmedDetail:false,
+  ifCountryDaily:false,
   ifDaily:false,
   ifMounth:false,
   ifDeathDetail:false,
@@ -48,7 +49,9 @@ const mutations = {
     state.ifDaily=true
   },
   setCountryDaily(state,data){
+    console.log(data)
     state.countryDaily=data;
+    state.ifCountryDaily=true;
   }
 
 };

@@ -18,7 +18,7 @@
           labels: ['Ocak', 'Subat', 'Mart', 'Nisan'],
           datasets: [
             {
-              label: "Cin'deki vaka sayisi",
+              label: "Çin'deki Vaka Sayısı",
               data: this.confirmed[1],
               backgroundColor: "transparent",
               borderColor: "rgb(134,214,43)",
@@ -32,7 +32,7 @@
               pointBackgroundColor: "rgba(171, 11, 18, 1)"
             },
             {
-              label: "Cin disindaki vaka sayisi",
+              label: "Çin Dışındaki Vaka Sayısı",
               data: this.confirmed[0],
               backgroundColor: "transparent",
               borderColor: "rgb(47,52,188)",

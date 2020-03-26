@@ -74,7 +74,7 @@
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: 'Ülkelerdeki Vaka Artışları',
+            text: 'Ülkerdeki Logaritmik Vaka Artışları',
             fontSize:24,
             padding:28,
           },
@@ -90,6 +90,10 @@
                 unit: 'day'
               },
             }],
+            yAxes: [{
+              type: 'logarithmic',
+              position: 'left'
+            }]
           }
         }
       );
