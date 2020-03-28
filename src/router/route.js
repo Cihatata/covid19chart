@@ -1,6 +1,7 @@
 import Home from '../components/Home'
 import Turkiye from '../components/Turkiye'
-import confirmedChart from "../components/confirmedChart";
+import kiyasla from "../components/kiyasla";
+import ulkeler from "../components/countryInfo";
 
 export default ({
   routes: [
@@ -15,9 +16,14 @@ export default ({
       component: Turkiye
     },
     {
-      path: '/chart',
-      name: 'Turkey',
-      component: confirmedChart
+      path: '/kiyasla',
+      name: 'Kiyasla',
+      component: kiyasla,
+    },
+    {
+      path:'/ulkeler/:ulke',
+      name:ulkeler,
+      component:ulkeler
     }
 
   ],

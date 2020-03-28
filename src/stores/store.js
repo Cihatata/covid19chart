@@ -7,13 +7,19 @@ const state = {
   deathDetail:{},
   countryInfo:{},
   countryDaily:[],
-  daily:{},
+  dailyConfirmed:{},
+  countryTimeLineQuery:{},
+  dailyDeaths:{},
+  countryQuery:{},
+  ifCountryQuery:false,
   ifConfirmedDetail:false,
   ifCountryDaily:false,
-  ifDaily:false,
+  ifDailyDeaths:false,
+  ifDailyConfirmed:false,
   ifMounth:false,
   ifDeathDetail:false,
   mounth:{},
+
 
 };
 const getters = {
@@ -44,14 +50,24 @@ const mutations = {
     state.mounth=data;
     state.ifMounth=true;
   },
-  setDaily(state,data){
-    state.daily=data;
-    state.ifDaily=true
+  setDailyConfirmed(state,data){
+    state.dailyConfirmed=data;
+    state.ifDailyConfirmed=true
+  },
+  setDailyDeaths(state,data){
+    state.dailyDeaths=data;
+    state.ifDailyDeaths=true;
   },
   setCountryDaily(state,data){
-    console.log(data)
     state.countryDaily=data;
     state.ifCountryDaily=true;
+  },
+  setTimelineQuery(state,data){
+    state.countryTimeLineQuery=data;
+  },
+  setCountryQuery(state,data){
+    state.countryQuery=data;
+    state.ifCountryQuery=true;
   }
 
 };
@@ -99,14 +115,29 @@ const actions = {
         context.commit('setMounth',(snapshot))
     })
   },
-  countryDaily(context,countryName){
-    return service.countryDaily(countryName).then((snapshot)=>{
+  countryDaily(context,){
+    return service.countryDaily().then((snapshot)=>{
       context.commit('setCountryDaily',(snapshot))
     })
   },
-  daily(context){
-    return service.daily().then((snapshot)=>{
-      context.commit('setDaily',(snapshot))
+  dailyConfirmed(context){
+    return service.dailyConfirmed().then((snapshot)=>{
+      context.commit('setDailyConfirmed',(snapshot))
+    })
+  },
+  dailyDeaths(context){
+    return service.dailyDeaths().then((snapshot)=>{
+      context.commit('setDailyDeaths',(snapshot))
+    })
+  },
+  countryTimeLineQuery(context,query){
+    return service.countryTimeLineQuery(query).then((res)=>{
+      context.commit('setTimelineQuery',(res))
+    })
+  },
+  countryQuery(context,query){
+    return service.countryQuery(query).then((res)=>{
+      context.commit('setCountryQuery',(res))
     })
   }
 

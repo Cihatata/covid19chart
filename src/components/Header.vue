@@ -1,61 +1,67 @@
 <template>
- <header class="header">
-   <div class="header-logo">
-     <img  src="../assets/analizlogo.png" alt="">
-   </div>
-   <div class="header-menu" :class="{show : isActive}">
-     <button v-scroll-to="{ element: '#grafik', duration: 2000 }" class="button" href="#confirmed">ANA SAYFA</button>
-     <button class="button" href="#grafik">Turkiye</button>
-     <button class="button">Kiyasla</button>
-     <button class="button">Bilgi</button>
-   </div>
-   <div class="header-switch" @click.prevent="isActive = !isActive">
-     <svg class="icon icon-menu">
-       <use xlink:href="#icon-menu"></use>
-     </svg>
-   </div>
- </header>
+  <header class="header">
+    <div class="header-logo">
+      <router-link to="/" tag="button">
+        <img src="../assets/analizlogo.png" alt="">
+      </router-link>
+    </div>
+    <div class="header-menu" :class="{show : isActive}">
+      <router-link to="/" tag="button" @click="isActive=!isActive">ANA SAYFA</router-link>
+      <button  class="button" @click="isActive=!isActive" v-scroll-to="{ element: '#line-chart', duration: 2000 }">
+        Grafikler
+      </button>
+      <button class="button">Bilgi</button>
+    </div>
+    <div class="header-switch" @click.prevent="isActive = !isActive">
+      <svg class="icon icon-menu">
+        <use xlink:href="#icon-menu"></use>
+      </svg>
+    </div>
+  </header>
 </template>
 
 <script>
-    export default {
-        name: "Header",
-      data() {
-        return {
-          isActive: false
-        }
-      },
-    }
+  export default {
+    name: "Header",
+    data() {
+      return {
+        isActive: false
+      }
+    },
+  }
 </script>
 
 <style lang="scss" scoped>
   @import "../assets/css/base/color.scss";
   @import "../assets/css/base/mixin";
-  .header{
+
+  .header {
     width: 100%;
     height: 100px;
-    background-color: #023308;
+    background-color: #106878;
     display: flex;
     position: relative;
     padding: 0 20px;
     box-sizing: border-box;
     align-items: center;
-    @include mq(){
+    @include mq() {
       height: 90px;
       position: relative;
     }
+
     &-logo {
-      img{
+      img {
         width: 200px;
         height: 110px;
         margin-left: 8px;
-        @include mq(){
+        @include mq() {
           margin-left: 50%;
           width: 200px;
-          height: 130px;
+          height: 110px;
         }
       }
     }
+
     &-menu {
       z-index: 1;
       display: flex;
@@ -73,7 +79,7 @@
       opacity: 0;
       transition: .3s;
       margin-bottom: 20px;
-      @include mq(){
+      @include mq() {
         opacity: 1;
         flex-direction: row;
         position: static;
@@ -83,14 +89,16 @@
         transform: translateX(0);
         margin-top: 15px;
         padding-right: 7%;
-        button{
+        button {
           color: white;
         }
 
       }
+
       &.show {
         opacity: 1;
         transform: translateX(0);
+
         button {
           //background-color: #0E566C ;
           border: 2px solid black !important;
@@ -100,6 +108,7 @@
       }
 
     }
+
     &-switch {
       position: relative;
       cursor: pointer;
@@ -110,9 +119,11 @@
       margin-bottom: 3px;
       margin-left: auto;
       margin-top: 10px;
-      svg{
+
+      svg {
         color: #cfd0d2;
       }
+
       @include mq("tablet") {
         display: none;
       }

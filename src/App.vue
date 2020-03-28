@@ -20,6 +20,7 @@ export default {
     Header,
     Home,
     Turkiye,
+
   }
 }
 </script>

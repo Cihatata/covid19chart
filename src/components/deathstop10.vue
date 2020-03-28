@@ -1,17 +1,16 @@
 <template>
   <section>
     <div v-for="(item) in deathData">
+      <router-link :to="'/ulkeler/' + item.province">
       <div  class="elementDeath ">
         <div  class="elementDeath-countryName">
           {{ item.counter }}-{{item.province}}
         </div>
-<!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->
-<!--          ({{item.provinceState}})-->
-<!--        </div>-->
         <div class="elementDeath-confirmed">
           {{item.deaths}}
         </div>
       </div>
+      </router-link>
     </div>
   </section>
 

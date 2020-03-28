@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 const http = axios.create({
   baseURL: 'https://covid19.mathdro.id/api',
 
@@ -28,8 +29,36 @@ function createObjectforChart(obj) {
   }
   return newObje;
 }
+function createObjectforCountryChart(obj) {
+  let gun = 32;
+  let ay = 5;
+  let yil = 20;
+  let Obje = {
+    cases:{
+    date:[]
+    },
+    deaths:{
+    date:[]
+    },
+    name: ''}
+  Obje.name = obj.country
+  for (var i = 1; i < ay; i++) {
+    for (var t = 1; t < gun; t++) {
+      let tarih2 = i + '/' + t + '/' + yil;
+      if (obj.timeline.cases[tarih2] !== undefined && obj.timeline.deaths[tarih2]) {
+        Obje.cases.date.push({x: '2020-' + i + '-' + t, y: obj.timeline.cases[tarih2]})
+        Obje.deaths.date.push({x: '2020-' + i + '-' + t, y: obj.timeline.deaths[tarih2]})
+
+      }
+    }
+  }
+  console.log(Obje)
+  return Obje;
+}
+
 
 export default {
+  request,
   confirmedPerson() {
     return request.get('/all')
       .then((res) => {
@@ -64,18 +93,6 @@ export default {
       })
 
   },
-  recorvedPerson() {
-    return http.get('/')
-      .then((res) => {
-        return res.data.recorved.value
-      })
-  },
-  recorvedDetail() {
-    return http.get('/recorved')
-      .then((res) => {
-        return res.data
-      })
-  },
   deathsPerson() {
     return request.get('/all')
       .then((res) => {
@@ -109,33 +126,14 @@ export default {
         return obj
       })
   },
-  countryDetail(countryName) {
-    return http.get(`/confirmed/${countryName}`)
+  countryTimeLineQuery(countryName) {
+    return request.get(`/v2/historical/${countryName}`)
       .then((res) => {
-
+        let obj=createObjectforCountryChart(res.data)
+        return obj
       })
   },
-  countryDaily(countryName) {
-    // return request.get('https://corona.lmao.ninja/v2/historical/' + countryName)
-    //   .then((res) => {
-    //     console.log(countryName)
-    //     let gun = 1;
-    //     let ay = 1;
-    //     let yil = 20;
-    //     let tarih = gun + '/' + ay + '/' + yil
-    //     let turkey = {veri: [], ulke: ''}
-    //     turkey.ulke = countryName
-    //     for (var i = 1; i < 4; i++) {
-    //       for (var t = 1; t < 32; t++) {
-    //         let tarih2 = i + '/' + t + '/' + yil;
-    //         if (res.data.timeline.cases[tarih2] !== undefined) {
-    //           turkey.veri.push({x: '2020-' + t + '-' + i, y: res.data.timeline.cases[tarih2]})
-    //         }
-    //       }
-    //     }
-    //     console.log(veri)
-    //     return turkey;
-    //   })
+  countryDaily() {
 
     const requestOne = request.get('/v2/historical/turkey', );
     const requestTwo = request.get('/v2/historical/iran');
@@ -160,13 +158,12 @@ export default {
        // const responesNine = createObjectforChart(responses[8].data)
 
         let arr = [responseOne, responseTwo, responesThree,responesFour,responesFive,responesSix,responesSeven]
-        console.log(arr);
         return arr;
       })).catch(errors => {
         // react on errors.
       })
   },
-  daily() {
+  dailyConfirmed() {
     return http.get('/daily')
       .then((res) => {
         let objTotalConfirmed = []
@@ -192,9 +189,42 @@ export default {
           })
 
         }
-
-        console.log(objTotalConfirmed)
         return [objOtherLocations, objMainlandChina, objTotalConfirmed];
+      })
+  },
+  dailyDeaths(){
+    return http.get('/daily')
+      .then((res) => {
+        let objTotalDeaths = []
+        let objMainlandChina = []
+        let objOtherLocations = []
+
+        for (let i = 0; i < res.data.length; i++) {
+          objTotalDeaths.push(
+            {
+              x: res.data[i].reportDate,
+              y: res.data[i].deaths.total
+            },
+          )
+          objMainlandChina.push(
+            {
+              x: res.data[i].reportDate,
+              y: res.data[i].deaths.china
+            }
+          )
+          objOtherLocations.push({
+            x: res.data[i].reportDate,
+            y: res.data[i].deaths.outsideChina
+          })
+
+        }
+        return [objOtherLocations, objMainlandChina, objTotalDeaths];
+      })
+  },
+  countryQuery(query) {
+    return  request.get(`/countries/${query}`)
+      .then((res)=>{
+        return res.data
       })
   },
   mounth() {

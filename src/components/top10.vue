@@ -1,10 +1,13 @@
 <template>
   <section>
     <div v-for="(item) in countryData">
-      <div  class="element ">
-        <div  class="element-countryName">
-          {{ item.counter }}-{{item.province}}
-        </div>
+      <router-link :to="'/ulkeler/' + item.province">
+      <div class="element ">
+
+          <div class="element-countryName">
+            {{ item.counter }}-{{item.province}}
+          </div>
+
         <!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->
         <!--          ({{item.provinceState}})-->
         <!--        </div>-->
@@ -12,6 +15,7 @@
           {{item.confirmed}}
         </div>
       </div>
+      </router-link>
     </div>
   </section>
 
@@ -20,7 +24,12 @@
 <script>
   export default {
     name: "top10",
-
+    data(){
+        return{
+          sa:'usa',
+          link:'/ulkeler/'+ this.sa,
+        }
+    },
     props: {
       countryData: {type: Array, required: true}
     },

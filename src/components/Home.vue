@@ -1,7 +1,7 @@
 <template>
   <section class="Home">
     <div class="three columns Home-info">
-      <loading class="loading" v-if="!$store.state.ifDaily"></loading>
+      <loading class="loading" v-if="!$store.state.ifDailyConfirmed">{{$store.state.ifDailyConfirmed}}</loading>
       <div v-else>
         <div class="Home-info-confirmedPerson" id="confirmed">
           <h3>Toplam Vaka</h3>
@@ -17,8 +17,9 @@
     <div class="six columns Home-info">
       <h1 id="grafik">Grafikler</h1>
       <hr>
-      <confirmedChart v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></confirmedChart>
-      <logirithmic v-if="$store.state.ifDaily" :confirmed="this.$store.state.daily"></logirithmic>
+      <confirmedChart v-if="$store.state.ifDailyConfirmed" :confirmed="this.$store.state.dailyConfirmed"></confirmedChart>
+      <logirithmic v-if="$store.state.ifDailyConfirmed" :confirmed="this.$store.state.dailyConfirmed"></logirithmic>
+      <death-chart v-if="$store.state.ifDailyDeaths" :death="$store.state.dailyDeaths"></death-chart>
       <div class="row">
         <div class="one-half column">
           <comparisonConfirmed v-if="$store.state.ifCountryDaily"
@@ -56,6 +57,7 @@
   import comparisonConfirmed from "./comparisonConfirmed";
   import loading from "./loading"
   import logCompConfirmed from "./logCompConfirmed";
+  import deathChart from "./deathChart";
 
   export default {
     name: "Home",
@@ -63,15 +65,15 @@
       return {}
     },
     mounted() {
-      this.$store.dispatch('daily').then(() => {
-
+      this.$store.dispatch('dailyConfirmed').then(() => {
       });
       this.$store.dispatch('deathsDetail').then(() => {
       })
       this.$store.dispatch('confirmedDetail').then(() => {
       });
       this.$store.dispatch('countryDaily').then(() => {
-
+      });
+      this.$store.dispatch('dailyDeaths').then(() => {
       });
 
     },
@@ -79,6 +81,7 @@
       this.$store.dispatch('deathsPerson').then(() => {
 
       });
+      this.$store.dispatch('dailyDeaths')
       this.$store.dispatch('confirmedPerson').then(() => {
       });
     },
@@ -97,6 +100,7 @@
         return this.$store.state.deathDetail;
       },
       confirmedDetail() {
+        console.log(this.$store.state.confirmedDetail)
         return this.$store.state.confirmedDetail;
       },
       comparisonChart() {
@@ -110,7 +114,8 @@
       deathstop10,
       comparisonConfirmed,
       loading,
-      logCompConfirmed
+      logCompConfirmed,
+      deathChart
     }
   }
 
@@ -121,6 +126,7 @@
   @import "../assets/css/base/mixin";
 
   .Home {
+    margin-top: 20px;
     background-color: ghostwhite;
     position: absolute;
     width: 100%;
