@@ -1,16 +1,21 @@
 <script>
+  import {mapActions,mapState} from 'vuex'
   import {Line} from "vue-chartjs";
 
   export default {
     extends: Line,
 
     props: {
-      data: {type: Array, required: true},
+      data: {type: Object, required: true},
     },
     methods: {
 
     },
+    computed:{
+
+    },
     mounted() {
+      console.log(this.data.name)
       this.renderChart(
         {
           labels: ['Ocak', 'Subat', 'Mart', 'Nisan'],

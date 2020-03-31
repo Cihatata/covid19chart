@@ -4,7 +4,7 @@
       <router-link :to="'/ulkeler/' + item.province">
       <div  class="elementDeath ">
         <div  class="elementDeath-countryName">
-          {{ item.counter }}-{{item.province}}
+          {{item.province}}
         </div>
         <div class="elementDeath-confirmed">
           {{item.deaths}}

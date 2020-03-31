@@ -11,6 +11,9 @@ const state = {
   countryTimeLineQuery:{},
   dailyDeaths:{},
   countryQuery:{},
+  dailyCaseIncrease:{},
+  ifDailyCaseIncrease:false,
+  ifCountryTimeLineQuery:false,
   ifCountryQuery:false,
   ifConfirmedDetail:false,
   ifCountryDaily:false,
@@ -46,10 +49,6 @@ const mutations = {
     state.deathDetail=data;
     state.ifDeathDetail=true;
   },
-  setMounth(state,data){
-    state.mounth=data;
-    state.ifMounth=true;
-  },
   setDailyConfirmed(state,data){
     state.dailyConfirmed=data;
     state.ifDailyConfirmed=true
@@ -64,10 +63,15 @@ const mutations = {
   },
   setTimelineQuery(state,data){
     state.countryTimeLineQuery=data;
+    state.ifCountryTimeLineQuery=true;
   },
   setCountryQuery(state,data){
     state.countryQuery=data;
     state.ifCountryQuery=true;
+  },
+  setDailyCaseIncrease(state,data){
+    state.dailyCaseIncrease=data;
+    state.ifDailyCaseIncrease=true;
   }
 
 };
@@ -110,12 +114,7 @@ const actions = {
       context.commit('setCountryDetail',(snapshot))
     })
   },
-  mounth(context){
-    return service.mounth().then((snapshot)=>{
-        context.commit('setMounth',(snapshot))
-    })
-  },
-  countryDaily(context,){
+  countryDaily(context){
     return service.countryDaily().then((snapshot)=>{
       context.commit('setCountryDaily',(snapshot))
     })
@@ -138,6 +137,11 @@ const actions = {
   countryQuery(context,query){
     return service.countryQuery(query).then((res)=>{
       context.commit('setCountryQuery',(res))
+    })
+  },
+  dailyCaseIncrease(context,countryName){
+    return service.dailyCaseIncrease(countryName).then((res)=>{
+      context.commit('setDailyCaseIncrease',(res))
     })
   }
 

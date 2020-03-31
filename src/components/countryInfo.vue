@@ -18,9 +18,11 @@
     </div>
     <div class="row chart">
       <div class="six columns">
-        <countryInfoChart :data="$store.state.countryTimeLineQuery"></countryInfoChart>
+        <countryInfoChart v-if="$store.state.ifCountryTimeLineQuery" :data="$store.state.countryTimeLineQuery"></countryInfoChart>
       </div>
-      <div class="six columns">sa</div>
+      <div class="six columns">
+          <dailyIncreaseCountry v-if="$store.state.ifDailyCaseIncrease" :data="$store.state.dailyCaseIncrease"></dailyIncreaseCountry>
+      </div>
     </div>
   </section>
 </template>
@@ -28,22 +30,25 @@
 <script>
   import service from "../services/service";
   import countryInfoChart from "./countryInfoChart";
+  import dailyIncreaseCountry from "./dailyIncreaseCountry";
   export default {
     name: "countryInfo",
     created() {
       this.$store.dispatch('countryQuery', this.$route.params.ulke)
       this.$store.dispatch('countryTimeLineQuery',this.$route.params.ulke)
+      this.$store.dispatch('dailyCaseIncrease',this.$route.params.ulke).then(()=>{
+
+      })
     },
     computed: {
       // async getir() {
       //   const data = await service.confirmedPerson()
       //   return data
-      test() {
-        thi
-      }
+
     },
     components:{
       countryInfoChart,
+      dailyIncreaseCountry,
     }
   }
 </script>

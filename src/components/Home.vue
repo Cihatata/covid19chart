@@ -76,6 +76,7 @@
       this.$store.dispatch('dailyDeaths').then(() => {
       });
 
+
     },
     created() {
       this.$store.dispatch('deathsPerson').then(() => {
@@ -100,7 +101,6 @@
         return this.$store.state.deathDetail;
       },
       confirmedDetail() {
-        console.log(this.$store.state.confirmedDetail)
         return this.$store.state.confirmedDetail;
       },
       comparisonChart() {

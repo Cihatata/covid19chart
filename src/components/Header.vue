@@ -6,10 +6,15 @@
       </router-link>
     </div>
     <div class="header-menu" :class="{show : isActive}">
-      <router-link to="/" tag="button" @click="isActive=!isActive">ANA SAYFA</router-link>
-      <button  class="button" @click="isActive=!isActive" v-scroll-to="{ element: '#line-chart', duration: 2000 }">
+      <div class="header-menu-search">
+        <input v-model="searchWord" type="search"  placeholder="Ulke adi giriniz(Ingilizce) ">
+        <i class="fa fa-search search-icon" @click.prevent="search"></i>
+      </div>
+      <router-link to="/" tag="button" >ANA SAYFA</router-link>
+      <button  class="button"  v-scroll-to="{ element: '#line-chart', duration: 2000 }">
         Grafikler
       </button>
+      <router-link to="/turkiye"><button class="button">Turkiye</button></router-link>
       <button class="button">Bilgi</button>
     </div>
     <div class="header-switch" @click.prevent="isActive = !isActive">
@@ -25,9 +30,16 @@
     name: "Header",
     data() {
       return {
-        isActive: false
+        isActive: false,
+        searchWord:'',
       }
     },
+    computed:{
+      search(){
+        console.log(this.searchWord)
+        this.$router.push({ path: `/ulkeler/${this.searchWord}`})
+      }
+    }
   }
 </script>
 
@@ -93,6 +105,23 @@
           color: white;
         }
 
+      }
+      &-search{
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        @include mq("tablet"){
+          margin-bottom: 6px;
+        }
+        input{
+          width: 100%;
+          margin-bottom: 0 !important;
+        }
+        i{
+          position: relative;
+          right: 25px;
+          cursor: pointer;
+        }
       }
 
       &.show {

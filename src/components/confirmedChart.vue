@@ -52,7 +52,7 @@
               type: 'time',
               //distribution: "linear",
               ticks: {
-                min: 1577883661000,
+                min: 1579541846000,
                 max: 1587734407000,
               },
               time: {

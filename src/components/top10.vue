@@ -5,7 +5,7 @@
       <div class="element ">
 
           <div class="element-countryName">
-            {{ item.counter }}-{{item.province}}
+            {{item.province}}
           </div>
 
         <!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->

@@ -11,8 +11,8 @@ export default ({
       component: Home,
     },
     {
-      path: '/turkey',
-      name: 'Turkey',
+      path: '/turkiye',
+      name: 'Turkiye',
       component: Turkiye
     },
     {
