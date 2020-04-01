@@ -18,10 +18,10 @@
     </div>
     <div class="row chart">
       <div class="six columns">
-        <countryInfoChart v-if="$store.state.ifCountryTimeLineQuery" :data="$store.state.countryTimeLineQuery"></countryInfoChart>
+        <countryInfoChart v-if="ifTimeline" :data="timelineData"></countryInfoChart>
       </div>
       <div class="six columns">
-          <dailyIncreaseCountry v-if="$store.state.ifDailyCaseIncrease" :data="$store.state.dailyCaseIncrease"></dailyIncreaseCountry>
+          <dailyIncreaseCountry  v-if="ifDailyCaseData" :data="dailyCaseData"></dailyIncreaseCountry>
       </div>
     </div>
   </section>
@@ -33,18 +33,45 @@
   import dailyIncreaseCountry from "./dailyIncreaseCountry";
   export default {
     name: "countryInfo",
-    created() {
-      this.$store.dispatch('countryQuery', this.$route.params.ulke)
-      this.$store.dispatch('countryTimeLineQuery',this.$route.params.ulke)
-      this.$store.dispatch('dailyCaseIncrease',this.$route.params.ulke).then(()=>{
-
-      })
+    data(){
+      return{
+        dailyCaseData:'',
+        ifDailyCaseData:false,
+        timelineData:'',
+        ifTimeline:false,
+      }
     },
-    computed: {
-      // async getir() {
-      //   const data = await service.confirmedPerson()
-      //   return data
+    created() {
+      this.dailyCaseFetch()
+      this.timeline()
 
+      // this.$store.dispatch('dailyCaseIncrease',this.$route.params.ulke).then(()=>{
+      //
+      // })
+    },
+    mounted() {
+      this.$store.dispatch('countryQuery', this.$route.params.ulke)
+    },
+    methods:{
+      dailyCaseFetch(){
+        service.dailyCaseIncrease(this.$route.params.ulke).then((res)=>{
+          this.dailyCaseData=res;
+          this.ifDailyCaseData=true;
+        })
+      },
+      timeline(){
+        service.countryTimeLineQuery(this.$route.params.ulke).then((res)=>{
+          this.timelineData=res;
+          this.ifTimeline=true;
+        })
+      }
+    },
+    watch:{
+      '$route'(to,from){
+        console.log('girdi')
+        console.log(to.params.ulke)
+        location.reload()
+      }
     },
     components:{
       countryInfoChart,

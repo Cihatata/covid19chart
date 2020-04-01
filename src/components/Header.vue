@@ -7,8 +7,8 @@
     </div>
     <div class="header-menu" :class="{show : isActive}">
       <div class="header-menu-search">
-        <input v-model="searchWord" type="search"  placeholder="Ulke adi giriniz(Ingilizce) ">
-        <i class="fa fa-search search-icon" @click.prevent="search"></i>
+        <input v-model="searchWord" type="search" v-on:keyup.enter="search"  placeholder="Ulke adi giriniz(Ingilizce) ">
+        <i class="fa fa-search search-icon"  @click.prevent="search"></i>
       </div>
       <router-link to="/" tag="button" >ANA SAYFA</router-link>
       <button  class="button"  v-scroll-to="{ element: '#line-chart', duration: 2000 }">

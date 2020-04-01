@@ -15,7 +15,6 @@
 
     },
     mounted() {
-      console.log(this.data.name)
       this.renderChart(
         {
           labels: ['Ocak', 'Subat', 'Mart', 'Nisan'],

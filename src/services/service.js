@@ -82,7 +82,6 @@ function dailyDifferent(obj) {
       }
     }
   }
-  console.log(Obje)
   return Obje;
 }
 
