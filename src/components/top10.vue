@@ -5,7 +5,7 @@
       <div class="element ">
 
           <div class="element-countryName">
-            {{item.province}}
+          {{item.counter}}-{{item.province}}
           </div>
 
         <!--        <div v-if="item.provinceState!=null" class="element-provincestate">-->
@@ -52,8 +52,9 @@
     margin-top: 8px;
     box-sizing: border-box;
     border-radius: 7px;
-    @include mq() {
 
+    @include mq() {
+      min-width: 230px;
     }
 
     &-confirmed {
@@ -78,5 +79,7 @@
       color: #eee;
     }
   }
-
+  a{
+    text-decoration: none;
+  }
 </style>

@@ -126,7 +126,6 @@
   @import "../assets/css/base/mixin";
 
   .Home {
-    margin-top: 20px;
     background-color: ghostwhite;
     position: absolute;
     width: 100%;
@@ -140,6 +139,9 @@
     &-info {
       overflow: visible;
       text-align: center;
+      @include mq(){
+        min-width: 250px;
+      }
 
       h1 {
         color: #025209;

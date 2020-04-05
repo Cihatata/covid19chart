@@ -4,7 +4,7 @@
       <router-link :to="'/ulkeler/' + item.province">
       <div  class="elementDeath ">
         <div  class="elementDeath-countryName">
-          {{item.province}}
+         {{item.counter}}-{{item.province}}
         </div>
         <div class="elementDeath-confirmed">
           {{item.deaths}}
@@ -46,6 +46,7 @@
     margin-top: 8px;
     box-sizing: border-box;
     border-radius: 7px;
+    min-width: 230px;
     @include mq() {
 
     }

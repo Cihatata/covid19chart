@@ -86,6 +86,7 @@
 
   .card {
     width: 92%;
+    min-width: 300px;
     margin-left: auto;
     margin-right: auto;
     position: relative;

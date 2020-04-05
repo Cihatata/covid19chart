@@ -11,6 +11,12 @@ const request = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
 })
+const turkey = axios.create({
+  baseURL: 'http://api.coronanaliz.com',
+  // headers:{
+  //   'Access-Control-Allow-Origin':'*'
+  // }
+})
 
 function createObjectforChart(obj) {
   let gun = 32;
@@ -88,6 +94,7 @@ function dailyDifferent(obj) {
 
 export default {
   request,
+  turkey,
   confirmedPerson() {
     return request.get('/all')
       .then((res) => {

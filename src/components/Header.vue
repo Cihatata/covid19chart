@@ -7,14 +7,14 @@
     </div>
     <div class="header-menu" :class="{show : isActive}">
       <div class="header-menu-search">
-        <input v-model="searchWord" type="search" v-on:keyup.enter="search"  placeholder="Ulke adi giriniz(Ingilizce) ">
+        <input v-model="searchWord" type="search" v-on:keyup.enter="search"  placeholder="Ülke adı yazınız(İngilizce) ">
         <i class="fa fa-search search-icon"  @click.prevent="search"></i>
       </div>
-      <router-link to="/" tag="button" >ANA SAYFA</router-link>
-      <button  class="button"  v-scroll-to="{ element: '#line-chart', duration: 2000 }">
+      <router-link to="/" tag="button" v-on:click.native="isActive=!isActive" >ANA SAYFA</router-link>
+      <button @click.prevent="isActive=!isActive"  class="button"  v-scroll-to="{ element: '#line-chart', duration: 2000 }">
         Grafikler
       </button>
-      <router-link to="/turkiye"><button class="button">Turkiye</button></router-link>
+      <router-link to="/turkiye" tag="button" v-on:click.native="isActive=!isActive"> Türkiye</router-link>
       <button class="button">Bilgi</button>
     </div>
     <div class="header-switch" @click.prevent="isActive = !isActive">
@@ -35,8 +35,12 @@
       }
     },
     computed:{
+      close(){
+        this.isActive=false;
+      },
       search(){
         console.log(this.searchWord)
+        this.isActive=false;
         this.$router.push({ path: `/ulkeler/${this.searchWord}`})
       }
     }
@@ -50,7 +54,7 @@
   .header {
     width: 100%;
     height: 100px;
-    background-color: #106878;
+    background-color: #edffde;
     display: flex;
     position: relative;
     padding: 0 20px;
@@ -63,13 +67,14 @@
 
     &-logo {
       img {
-        width: 200px;
-        height: 110px;
+        margin-top: 12px;
+        width: 240px;
+        height: 90px;
         margin-left: 8px;
         @include mq() {
-          margin-left: 50%;
-          width: 200px;
-          height: 110px;
+          margin-left: 40%;
+          width: 250px;
+          height: 80px;
         }
       }
     }
@@ -84,7 +89,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: antiquewhite;
+      background-color: honeydew;
       padding: 20px;
       box-shadow: 0 10px 10px rgba(black, .2);
       transform: translateX(-100%);
@@ -96,13 +101,14 @@
         flex-direction: row;
         position: static;
         margin-left: auto;
-        background-color: transparent;
+        background-color: #edffde;
         box-shadow: none;
         transform: translateX(0);
         margin-top: 15px;
         padding-right: 7%;
         button {
-          color: white;
+          border: none;
+          color: #021b07;
         }
 
       }
@@ -114,10 +120,14 @@
           margin-bottom: 6px;
         }
         input{
+          color: gray;
+          font-family: 'Helvetica', Arial;
           width: 100%;
           margin-bottom: 0 !important;
+          border-radius: 5px;
         }
         i{
+          color: #117a8b;
           position: relative;
           right: 25px;
           cursor: pointer;
@@ -130,9 +140,18 @@
 
         button {
           //background-color: #0E566C ;
-          border: 2px solid black !important;
+          border: 2px solid #1190a1;
           width: 98%;
           border-radius: 5px;
+          color: #1190a1;
+        }
+      }
+      @include mq('tablet'){
+        &.show{
+          button{
+            border: none;
+            width: auto;
+          }
         }
       }
 
@@ -143,7 +162,7 @@
       cursor: pointer;
       box-sizing: border-box;
       border: 1px solid gray;
-      padding: 9px;
+      padding: 6px;
       border-radius: 4px;
       margin-bottom: 3px;
       margin-left: auto;
