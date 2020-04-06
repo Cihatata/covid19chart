@@ -1,9 +1,23 @@
 # covid19chart
 
-> A Vue.js project
+> Visualization of Covid19 data with VueJS
+
+## Screena
+![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen1.png "Ekran1")
+![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen2.png "Ekran2")
+![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen3.png "Ekran3")
+![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen5.png "Ekran1")
+![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen6.png "Ekran1")
+
+## Api Resource
+
+```
+https://github.com/novelcovid/api
+https://covid19.mathdro.id
+http://api.coronanaliz.com
+```
 
 ## Build Setup
-
 ``` bash
 # install dependencies
 npm install
