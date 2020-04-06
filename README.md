@@ -2,7 +2,7 @@
 
 > Visualization of Covid19 data with VueJS
 
-## Screena
+## Screens
 ![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen1.png "Ekran1")
 ![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen2.png "Ekran2")
 ![alt text](https://github.com/Cihatata/covid19chart/blob/master/screen/screen3.png "Ekran3")
