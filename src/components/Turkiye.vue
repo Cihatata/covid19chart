@@ -199,7 +199,7 @@
           font-size: 20px;
         }
         span{
-          font-family: Teko;
+          font-family: Teko,sans-serif;
           margin-left: auto;
           font-size: 42px;
         }
@@ -231,7 +231,7 @@
           }
         }
         span{
-          font-family: Teko;
+          font-family: Teko,sans-serif;
           margin-left: auto;
           font-size: 48px;
           @include mq(){

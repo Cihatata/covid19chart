@@ -1,7 +1,7 @@
 import Home from '../components/Home'
 import Turkiye from '../components/Turkiye'
-import kiyasla from "../components/kiyasla";
-import ulkeler from "../components/countryInfo";
+import ulkeBilgi from "../components/countryInfo";
+import dunya from "../components/dunya";
 
 export default ({
   routes: [
@@ -16,14 +16,14 @@ export default ({
       component: Turkiye
     },
     {
-      path: '/kiyasla',
-      name: 'Kiyasla',
-      component: kiyasla,
+      path: '/ulkeler',
+      name: 'Dunya',
+      component: dunya,
     },
     {
       path:'/ulkeler/:ulke',
-      name:ulkeler,
-      component:ulkeler
+      name:ulkeBilgi,
+      component:ulkeBilgi
     }
 
   ],

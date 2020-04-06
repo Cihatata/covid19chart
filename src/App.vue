@@ -2,13 +2,13 @@
   <div id="app">
     <Header/>
     <router-view></router-view>
+    <Foot/>
   </div>
 </template>
 
 <script>
   import Header from './components/Header'
-  import Home from './components/Home'
-  import Turkiye from "./components/Turkiye";
+  import Foot from "./components/footer";
 export default {
   name: 'app',
   data () {
@@ -18,8 +18,7 @@ export default {
   },
   components:{
     Header,
-    Home,
-    Turkiye,
+    Foot
 
   }
 }

@@ -7,7 +7,7 @@
     </div>
     <div class="header-menu" :class="{show : isActive}">
       <div class="header-menu-search">
-        <input v-model="searchWord" type="search" v-on:keyup.enter="search"  placeholder="Ülke adı yazınız(İngilizce) ">
+        <input v-model="searchWord" type="search" v-on:keyup.enter="search"  placeholder="Ülke adı(İngilizce) ">
         <i class="fa fa-search search-icon"  @click.prevent="search"></i>
       </div>
       <router-link to="/" tag="button" v-on:click.native="isActive=!isActive" >ANA SAYFA</router-link>
@@ -15,7 +15,7 @@
         Grafikler
       </button>
       <router-link to="/turkiye" tag="button" v-on:click.native="isActive=!isActive"> Türkiye</router-link>
-      <button class="button">Bilgi</button>
+      <router-link to="/ulkeler" tag="button" v-on:click.native="isActive=!isActive"> Dünya</router-link>
     </div>
     <div class="header-switch" @click.prevent="isActive = !isActive">
       <svg class="icon icon-menu">
@@ -68,8 +68,8 @@
     &-logo {
       img {
         margin-top: 12px;
-        width: 240px;
-        height: 90px;
+        width: 180px;
+        height: 60px;
         margin-left: 8px;
         @include mq() {
           margin-left: 40%;
@@ -161,7 +161,7 @@
       position: relative;
       cursor: pointer;
       box-sizing: border-box;
-      border: 1px solid gray;
+      border: 1px solid #1190a1;
       padding: 6px;
       border-radius: 4px;
       margin-bottom: 3px;
@@ -169,7 +169,8 @@
       margin-top: 10px;
 
       svg {
-        color: #cfd0d2;
+        margin-top: 4px;
+        color: #1190a1;
       }
 
       @include mq("tablet") {

@@ -101,6 +101,12 @@ export default {
         return res.data.cases;
       })
   },
+  country(){
+    return request.get('/countries')
+      .then((res)=>{
+        return res.data;
+      })
+  },
   confirmedDeatil() {
     return request.get('/countries?sort=cases')
       .then((res) => {
