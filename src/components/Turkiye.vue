@@ -257,7 +257,7 @@
         color: #026309;
         //font-weight: bold;
         @include mq() {
-          font-size: 280px;
+          font-size: 240px;
         }
       }
 

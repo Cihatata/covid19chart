@@ -84,7 +84,7 @@
               //distribution: "linear",
               ticks: {
                 min: 1583101680000,
-                max: 1588285680000  ,
+                  max: 1588285680000  ,
               },
               time: {
                 unit: 'day'

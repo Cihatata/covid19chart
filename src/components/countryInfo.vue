@@ -9,7 +9,7 @@
           <div class="card-info">
             <h3 class="card-info-title">{{$store.state.countryQuery.country}}</h3>
             <p class="card-info-context">Vaka : {{$store.state.countryQuery.cases}}</p>
-            <p class="card-info-context">Ölüm : {{$store.state.countryQuery.deaths}}</p>
+            <p class="card-info-context">Vefat : {{$store.state.countryQuery.deaths}}</p>
             <p class="card-info-context">İyileşen : {{$store.state.countryQuery.recovered}}</p>
           </div>
 

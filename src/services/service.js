@@ -96,19 +96,19 @@ export default {
   request,
   turkey,
   confirmedPerson() {
-    return request.get('/all')
+    return request.get('/v2/all')
       .then((res) => {
         return res.data.cases;
       })
   },
   country(){
-    return request.get('/countries')
+    return request.get('/v2/countries?sort=cases')
       .then((res)=>{
         return res.data;
       })
   },
   confirmedDeatil() {
-    return request.get('/countries?sort=cases')
+    return request.get('/v2/countries?sort=cases')
       .then((res) => {
         return res.data;
       }).then((res) => {
@@ -126,13 +126,13 @@ export default {
 
   },
   deathsPerson() {
-    return request.get('/all')
+    return request.get('/v2/all')
       .then((res) => {
         return res.data.deaths
       })
   },
   deathsDetail() {
-    return request.get('/countries?sort=deaths')
+    return request.get('/v2/countries?sort=deaths')
       .then((res) => {
         return res.data
       }).then((res) => {
@@ -244,7 +244,7 @@ export default {
       })
   },
   countryQuery(query) {
-    return  request.get(`/countries/${query}`)
+    return  request.get(`/v2/countries/${query}`)
       .then((res)=>{
         return res.data
       })

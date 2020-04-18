@@ -16,21 +16,21 @@
           labels: ['Ocak', 'Subat', 'Mart', 'Nisan'],
           datasets: [
             {
-              label: "Çindeki Vaka Sayısı",
+              label: "Çindeki Vefat Sayısı",
               data: this.death[1],
               backgroundColor: "transparent",
               borderColor: "rgb(134,214,43)",
               pointBackgroundColor: "rgb(134,214,43)"
             },
             {
-              label: "Toplam Vaka",
+              label: "Toplam Vefat",
               data: this.death[2],
               backgroundColor: "transparent",
               borderColor: "rgba(171, 11, 18, 1)",
               pointBackgroundColor: "rgba(171, 11, 18, 1)"
             },
             {
-              label: "Çin Dışındaki Vaka Sayısı",
+              label: "Çin Dışındaki Vefat Sayısı",
               data: this.death[0],
               backgroundColor: "transparent",
               borderColor: "rgb(47,52,188)",
@@ -43,7 +43,7 @@
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: 'Günlük Ölü Grafiği',
+            text: 'Günlük Hayatını Kaybedenlerin Grafiği',
             fontSize:24,
             padding:28,
           },

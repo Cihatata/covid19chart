@@ -20,7 +20,7 @@
           labels: ['Ocak', 'Subat', 'Mart', 'Nisan'],
           datasets: [
             {
-              label: this.data.name  + "Günlük Açıklanan vaka sayısı",
+              label: this.data.name  + "Günlük Açıklanan Vaka sayısı",
               data: this.data.cases.date,
               hoverBorderColor:"rgba(134,214,43)",
               backgroundColor: "rgb(232,222,38)",
@@ -28,7 +28,7 @@
               pointBackgroundColor: "rgb(134,214,43)"
             },
             {
-              label:this.data.name +" Günlük Açıklanan ölü sayısı",
+              label:this.data.name +" Günlük açıklanan hayatını kaybedenlerın sayısı",
               data: this.data.deaths.date,
               backgroundColor: "rgba(171, 11, 18, 1)",
               borderColor: "rgba(171, 11, 18, 1)",
@@ -42,7 +42,7 @@
           maintainAspectRatio: false,
           title: {
             display: true,
-            text:this.data.name +'\'Günlük Açıklanan vaka ve ölüm sayısı',
+            text:this.data.name +'\'Günlük Açıklanan Vaka ve Vefat sayısı',
             fontSize:24,
             padding:28,
           },

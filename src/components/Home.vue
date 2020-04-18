@@ -35,7 +35,7 @@
       <loading v-if="!$store.state.ifDeathDetail" ></loading>
       <div v-else>
         <div class="Home-info-deathsPerson">
-          <h3>Toplam Ölüm</h3>
+          <h3>Toplam Vefat</h3>
           <h4>{{deathsPerson}}</h4>
         </div>
         <section class="Home-info-deathsDetail">

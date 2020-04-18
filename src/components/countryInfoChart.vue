@@ -25,7 +25,7 @@
               pointBackgroundColor: "rgb(134,214,43)"
             },
             {
-              label:this.data.name +" Ölü sayısı",
+              label:this.data.name +" Vefat sayısı",
               data: this.data.deaths.date,
               backgroundColor: "transparent",
               borderColor: "rgba(171, 11, 18, 1)",
@@ -39,7 +39,7 @@
           maintainAspectRatio: false,
           title: {
             display: true,
-            text:this.data.name +'\'daki Vaka ve Ölümler Grafiği',
+            text:this.data.name +'\'daki Vaka ve Hayatını kaybedenlerin Grafiği',
             fontSize:24,
             padding:28,
           },

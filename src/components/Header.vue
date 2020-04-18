@@ -11,9 +11,6 @@
         <i class="fa fa-search search-icon"  @click.prevent="search"></i>
       </div>
       <router-link to="/" tag="button" v-on:click.native="isActive=!isActive" >ANA SAYFA</router-link>
-      <button @click.prevent="isActive=!isActive"  class="button"  v-scroll-to="{ element: '#line-chart', duration: 2000 }">
-        Grafikler
-      </button>
       <router-link to="/turkiye" tag="button" v-on:click.native="isActive=!isActive"> Türkiye</router-link>
       <router-link to="/ulkeler" tag="button" v-on:click.native="isActive=!isActive"> Dünya</router-link>
     </div>
